@@ -30,6 +30,64 @@ console.log('Join method');
 console.log(letters.join('-'));
 console.log(letters);
 
+console.log('At method');
+console.log(letters.at(0));
+console.log(letters.at(-2));
+const word = 'Sunil';
+console.log(word.at(0));
+console.log(word.at(-3));
+
+console.log('ForEach method');
+const transactions = [
+  1000, 500, -200, 4000, -3000, 5000, -300, 600, -200, 1500,
+];
+for (const [i, tranc] of transactions.entries()) {
+  if (tranc > 0)
+    console.log(
+      `Your transaction: ${i + 1} - Deposited ${
+        Math.abs(tranc) + '₹'
+      } to your account`
+    );
+  else
+    console.log(
+      `Your transaction: ${i + 1} - Withdrawed ${
+        Math.abs(tranc) + '₹'
+      } from your account`
+    );
+}
+
+console.log('------Foreach---------');
+
+transactions.forEach(function (tranc, i, arr) {
+  if (tranc > 0)
+    console.log(
+      `Your transaction: ${i + 1} - Deposited ${
+        Math.abs(tranc) + '₹'
+      } to your account`
+    );
+  else
+    console.log(
+      `Your transaction: ${i + 1} - Withdrawed ${
+        Math.abs(tranc) + '₹'
+      } from your account`
+    );
+});
+
+const banks = new Map([
+  ['SBI', 'State Bank of India'],
+  ['KMB', 'Kotak Mahindra Bank'],
+  ['KGB', 'Karnataka Gramin Bank'],
+]);
+
+banks.forEach(function (value, key, arr) {
+  console.log(`${key} : ${value}`);
+});
+
+const banks1 = new Set(['SBI', 'KMB', 'KGB']);
+banks1.forEach(function (value, key, arr) {
+  console.log(`${key} : ${value}`);
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
