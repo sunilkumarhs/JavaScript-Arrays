@@ -144,6 +144,22 @@ const dogsKate = [4, 1, 15, 8, 3];
 // const dogsKate = [10, 5, 6, 1, 4];
 checkDogs(dogsJulia, dogsKate);
 
+console.log('map,filter,reduce methods');
+
+const oneUSD = 0.012;
+
+const transactionUSD = transactions.map(tranc => tranc * oneUSD);
+console.log(transactions);
+console.log(transactionUSD);
+
+const transactionDetail = transactions.map(
+  (tranc, i) =>
+    `Your ${i + 1} transaction - ${
+      tranc > 0 ? 'Deopited' : 'Withdrawed'
+    } ${Math.abs(tranc)}`
+);
+console.log(transactionDetail);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -237,3 +253,16 @@ const displayTransactions = function (transactions) {
 };
 
 displayTransactions(account1.transactions);
+
+const createusername = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
+  });
+};
+createusername(accounts);
+
+console.log(accounts);
