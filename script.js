@@ -160,6 +160,22 @@ const transactionDetail = transactions.map(
 );
 console.log(transactionDetail);
 
+const deposits = transactions.filter(function (tranc) {
+  return tranc > 0;
+});
+console.log(deposits);
+
+const withdrawals = transactions.filter(tranc => tranc < 0);
+console.log(withdrawals);
+
+const balance = transactions.reduce(function (bal, tranc, i) {
+  console.log(`Transaction ${i} : ${bal}`);
+  return bal + tranc;
+}, 0);
+console.log(`Balance : ${balance}`);
+
+const maximum = transactions.reduce((max, tranc));
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -254,6 +270,12 @@ const displayTransactions = function (transactions) {
 
 displayTransactions(account1.transactions);
 
+const totalBalance = function (transactions) {
+  const balance = transactions.reduce((bal, tranc) => bal + tranc, 0);
+  labelBalance.textContent = `${balance} INR`;
+};
+totalBalance(account1.transactions);
+
 const createusername = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -264,5 +286,4 @@ const createusername = function (accs) {
   });
 };
 createusername(accounts);
-
 console.log(accounts);
