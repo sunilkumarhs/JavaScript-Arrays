@@ -215,6 +215,13 @@ const calAverageHumanAge = function (ages) {
 const ages = [16, 6, 10, 5, 6, 1, 4];
 calAverageHumanAge(ages);
 
+const totalDepositUSD = transactions
+  .filter(tranc => tranc > 0)
+  .map(tranc => tranc * oneUSD)
+  .reduce((dep, tranc) => dep + tranc);
+
+console.log(`Total Deposit in USD : ${totalDepositUSD}`);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -314,6 +321,27 @@ const totalBalance = function (transactions) {
   labelBalance.textContent = `${balance} INR`;
 };
 totalBalance(account1.transactions);
+
+const totalSummaryDisplay = function (transactions) {
+  const totalDeposit = transactions
+    .filter(tranc => tranc > 0)
+    .reduce((dep, tranc) => dep + tranc, 0);
+  labelSumIn.textContent = `${totalDeposit} ₹`;
+
+  const totalWithdraw = transactions
+    .filter(tranc => tranc < 0)
+    .reduce((wit, tranc) => wit + tranc, 0);
+  labelSumOut.textContent = `${Math.abs(totalWithdraw)} ₹`;
+
+  const totalIntrest = transactions
+    .filter(tranc => tranc > 0)
+    .map(tranc => (tranc * 1.2) / 100)
+    .filter(int => int >= 1)
+    .reduce((tot, int) => tot + int, 0);
+  labelSumInterest.textContent = `${totalIntrest} ₹`;
+};
+
+totalSummaryDisplay(account1.transactions);
 
 const createusername = function (accs) {
   accs.forEach(function (acc) {
