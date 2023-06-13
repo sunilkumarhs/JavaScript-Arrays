@@ -215,12 +215,50 @@ const calAverageHumanAge = function (ages) {
 const ages = [16, 6, 10, 5, 6, 1, 4];
 calAverageHumanAge(ages);
 
+console.log('Pipelining');
 const totalDepositUSD = transactions
   .filter(tranc => tranc > 0)
   .map(tranc => tranc * oneUSD)
-  .reduce((dep, tranc) => dep + tranc);
+  .reduce((dep, tranc) => dep + tranc, 0);
 
 console.log(`Total Deposit in USD : ${totalDepositUSD}`);
+
+console.log('Challenge 3');
+// Coding Challenge #3
+
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+
+const arrowCalAveragehumanAge = function (ages) {
+  const avgHumanAge = ages
+    .map(age => (age > 2 ? 16 + age * 4 : 2 * age))
+    .filter((age, _, arr) => {
+      console.log(arr);
+      return age >= 18;
+    })
+    .reduce((avg, age, _, arr) => {
+      console.log(arr);
+      return avg + age / arr.length;
+    }, 0);
+  console.log(avgHumanAge);
+};
+
+arrowCalAveragehumanAge(ages);
+
+// const transactions = [
+//   1000, 500, -200, 4000, -3000, 5000, -300, 600, -200, 1500,
+// ];
+
+console.log('Find method');
+const firstWithdrawel = transactions.find(tranc => tranc < 0);
+console.log(transactions);
+console.log(firstWithdrawel);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -256,6 +294,10 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+
+console.log(accounts);
+const account = accounts.find(acc => acc.owner === 'Steven Thomas Williams');
+console.log(account);
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
