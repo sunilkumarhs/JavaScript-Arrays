@@ -10,9 +10,13 @@ console.log(arr.slice(1, -2));
 console.log(arr.slice(-1, -3));
 console.log(arr);
 
+const arr1 = ['a', 'b', 'c', 'd', 'e'];
 console.log('Splice method');
-console.log(arr.splice(2, 4));
-console.log(arr);
+// console.log(arr.splice(3, 4));
+// console.log(arr.splice(1, 1));
+// arr1 = arr1.splice(1);
+console.log(arr1.splice(3, 1));
+console.log(arr1);
 
 arr = ['a', 'b', 'c', 'd', 'e'];
 let arr2 = ['j', 'i', 'h', 'g', 'f'];
@@ -450,5 +454,18 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.transactions.push(-amount);
     reciever.transactions.push(amount);
     updateUI(currentAccount);
+  }
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  // const user = accounts.find(acc => acc.username === inputCloseUsername.value);
+  const user = inputCloseUsername.value;
+  const pin = Number(inputClosePin.value);
+
+  if (user === currentAccount.username && pin === currentAccount.pin) {
+    const index = accounts.findIndex(acc => acc.username === user);
+    accounts.splice(index, 1);
+    containerApp.style.opacity = 0;
   }
 });
