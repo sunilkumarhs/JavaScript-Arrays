@@ -268,6 +268,26 @@ console.log('some and every method');
 const grant = transactions.some(tranc => tranc > 0);
 console.log(grant);
 
+const depo = transactions.every(tranc => tranc > 0);
+console.log(depo);
+
+console.log('falt and flatmap');
+const farr = [1, [2, 3], 4, [[5, 6], 7], 8, 9];
+const flat = farr.flat();
+const flat1 = farr.flat(2);
+console.log(flat);
+console.log(flat1);
+
+console.log('sorting method');
+const names = ['sunil', 'charan', 'seena', 'ajay', 'ganesh'];
+console.log(names.sort());
+console.log(names);
+
+console.log(transactions);
+transactions.sort((a, b) => a - b);
+console.log(transactions);
+transactions.sort((a, b) => b - a);
+console.log(transactions);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -346,11 +366,22 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+const depOnly = account4.transactions.every(tranc => tranc > 0);
+console.log(depOnly);
+
+const totalBankBalance = accounts
+  .flatMap(acc => acc.transactions)
+  .reduce((bal, tranc) => bal + tranc, 0);
+console.log(totalBankBalance);
+
 /////////////////////////////////////////////////
 
-const displayTransactions = function (transactions) {
+const displayTransactions = function (transactions, sort = false) {
   containerMovements.innerHTML = '';
-  transactions.forEach(function (tranc, i) {
+  const sortTransactions = sort
+    ? transactions.slice().sort((a, b) => a - b)
+    : transactions;
+  sortTransactions.forEach(function (tranc, i) {
     const type = tranc > 0 ? 'deposit' : 'withdrawal';
     const trancRow = `
     <div class="movements__row">
@@ -487,4 +518,12 @@ btnClose.addEventListener('click', function (e) {
     accounts.splice(index, 1);
     containerApp.style.opacity = 0;
   }
+});
+
+let sort = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayTransactions(currentAccount.transactions, !sort);
+  sort = !sort;
 });
