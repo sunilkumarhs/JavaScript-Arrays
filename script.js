@@ -264,6 +264,10 @@ const firstWithdrawel = transactions.find(tranc => tranc < 0);
 console.log(transactions);
 console.log(firstWithdrawel);
 
+console.log('some and every method');
+const grant = transactions.some(tranc => tranc > 0);
+console.log(grant);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -455,6 +459,21 @@ btnTransfer.addEventListener('click', function (e) {
     reciever.transactions.push(amount);
     updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (
+    amount > 0 &&
+    currentAccount.transactions.some(tranc => tranc > amount * 0.1)
+  ) {
+    currentAccount.transactions.push(amount);
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
 });
 
 btnClose.addEventListener('click', function (e) {
