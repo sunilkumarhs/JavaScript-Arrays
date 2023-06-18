@@ -305,6 +305,34 @@ let z = Array.from({ length: 7 }, () => 2);
 console.log(z);
 z = Array.from({ length: 7 }, (cur, i) => i + 1);
 console.log(z);
+
+console.log('Capitalize string');
+
+const titleCapitalize = function (title) {
+  const capitzalize = str => str[0].toUpperCase() + str.slice(1);
+  const exceptions = [
+    'a',
+    'an',
+    'and',
+    'the',
+    'but',
+    'or',
+    'of',
+    'on',
+    'in',
+    'with',
+  ];
+  const capTitle = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitzalize(word)))
+    .join(' ');
+  console.log(capitzalize(capTitle));
+};
+
+titleCapitalize('the title is very lengthy');
+titleCapitalize('The title is very lengthy but not To legthy');
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -398,6 +426,27 @@ labelBalance.addEventListener('click', function () {
   );
   console.log(transactioUI);
 });
+
+const numDep1000 = accounts
+  .flatMap(acc => acc.transactions)
+  .filter(tranc => tranc >= 1000).length;
+console.log(numDep1000);
+
+const numDep1000Red = accounts
+  .flatMap(acc => acc.transactions)
+  .reduce((count, tranc) => (tranc >= 1000 ? ++count : count), 0);
+console.log(numDep1000Red);
+
+const { deposit, withdrawel } = accounts
+  .flatMap(acc => acc.transactions)
+  .reduce(
+    (sum, tranc) => {
+      sum[tranc > 0 ? 'deposit' : 'withdrawel'] += tranc;
+      return sum;
+    },
+    { deposit: 0, withdrawel: 0 }
+  );
+console.log(deposit, withdrawel);
 
 /////////////////////////////////////////////////
 
