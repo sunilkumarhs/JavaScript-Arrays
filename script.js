@@ -365,29 +365,35 @@ GOOD LUCK 😀
 */
 
 const foodPortionCheck = function (dogs) {
-  const foodCal = (cur, rec) => {
-    if (cur > rec * 0.9 && cur < rec * 1.1) {
-      console.log('eating perfect food');
-    } else if (cur > rec) {
-      console.log('eating more food');
-    } else {
-      console.log('eating less food');
-    }
-  };
   const ownersEatTooMuch = [];
   const ownersEatTooLittle = [];
   dogs.forEach(dog => {
-    dog.recomendedFood = dog.weight ** 0.75 * 28;
-    dog.owners.includes('Sarah')
-      ? foodCal(dog.curFood, dog.recomendedFood)
-      : '';
-    dog.curFood > dog.recomendedFood
+    dog.recomendedFood = Math.trunc(dog.weight ** 0.75 * 28); //1
+    dog.curFood > dog.recomendedFood //3
       ? ownersEatTooMuch.push(dog.owners)
       : ownersEatTooLittle.push(dog.owners);
   });
+  const dogSarah = dogs.find(dog => dog.owners.includes('Sarah')); //2
+  console.log(dogSarah);
+  console.log(
+    `Sarah's dog eats ${
+      dogSarah.curFood > dogSarah.recomendedFood ? 'more' : 'little'
+    } food`
+  );
   console.log(ownersEatTooMuch.flat());
   console.log(ownersEatTooLittle.flat());
-  console.log(`${ownersEatTooMuch[0]}, ${ownersEatTooMuch}`);
+  console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat to much!`); //4
+  console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat to little!`);
+  console.log(dogs.some(dog => dog.curFood === dog.recomendedFood)); //5
+  const checkEatingOkay = dog =>
+    dog.curFood > dog.recomendedFood * 0.9 &&
+    dog.curFood < dog.recomendedFood * 1.1;
+  console.log(dogs.some(checkEatingOkay)); //6
+  console.log(dogs.filter(checkEatingOkay)); //7
+  const sortedDogs = dogs //8
+    .slice()
+    .sort((a, b) => a.recomendedFood - b.recomendedFood);
+  console.log(sortedDogs);
 };
 
 const dogs = [
