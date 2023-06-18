@@ -288,6 +288,23 @@ transactions.sort((a, b) => a - b);
 console.log(transactions);
 transactions.sort((a, b) => b - a);
 console.log(transactions);
+
+console.log('More ways of operation in arrays');
+const array = [1, 2, 3, 4, 5, 6, 7];
+console.log(array);
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+const x = new Array(7);
+console.log(x);
+x.fill(1);
+console.log(x);
+const y = new Array(7);
+y.fill(1, 3, 5);
+console.log(y);
+
+let z = Array.from({ length: 7 }, () => 2);
+console.log(z);
+z = Array.from({ length: 7 }, (cur, i) => i + 1);
+console.log(z);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -373,6 +390,14 @@ const totalBankBalance = accounts
   .flatMap(acc => acc.transactions)
   .reduce((bal, tranc) => bal + tranc, 0);
 console.log(totalBankBalance);
+
+labelBalance.addEventListener('click', function () {
+  const transactioUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('₹', ''))
+  );
+  console.log(transactioUI);
+});
 
 /////////////////////////////////////////////////
 
